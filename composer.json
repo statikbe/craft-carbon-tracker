@@ -1,0 +1,48 @@
+{
+    "name": "statikbe/craft-carbon-tracker",
+    "type": "craft-plugin",
+    "license": "mit",
+    "support": {
+        "email": "support@statik.be",
+        "issues": "https://github.com/statikbe/craft-carbon-tracker/issues?state=open",
+        "source": "https://github.com/statikbe/craft-carbon-tracker",
+        "docs": "https://github.com/statikbe/craft-carbon-tracker",
+        "rss": "https://github.com/statikbe/craft-carbon-tracker/releases.atom"
+    },
+    "require": {
+        "php": ">=8.0.2",
+        "craftcms/cms": "^4.5.0"
+    },
+    "require-dev": {
+        "craftcms/ecs": "dev-main",
+        "craftcms/phpstan": "dev-main"
+    },
+    "autoload": {
+        "psr-4": {
+            "statikbe\\carbontracker\\": "src/"
+        }
+    },
+    "extra": {
+        "handle": "carbon-tracker",
+        "name": "carbon-tracker",
+        "developer": "Statik.be",
+        "documentationUrl": "https://github.com/statikbe/craft-carbon-tracker",
+        "class": "statikbe\\carbontracker\\CarbonTracker"
+    },
+    "scripts": {
+        "check-cs": "ecs check --ansi",
+        "fix-cs": "ecs check --ansi --fix",
+        "phpstan": "phpstan --memory-limit=1G"
+    },
+    "config": {
+        "sort-packages": true,
+        "platform": {
+            "php": "8.0.2"
+        },
+        "allow-plugins": {
+            "yiisoft/yii2-composer": true,
+            "craftcms/plugin-installer": true
+        }
+    }
+}
+
