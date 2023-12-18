@@ -8,8 +8,13 @@ use craft\base\Model;
 use craft\base\Plugin;
 use craft\elements\Entry;
 use craft\events\DefineHtmlEvent;
+use craft\events\ModelEvent;
+use craft\helpers\ElementHelper;
+use craft\helpers\Queue;
+use statikbe\carbontracker\jobs\CarbonStatsJob;
 use statikbe\carbontracker\models\Settings;
 use statikbe\carbontracker\services\ApiService;
+use statikbe\carbontracker\services\StatsService;
 use yii\console\Application as ConsoleApplication;
 
 
@@ -19,6 +24,7 @@ use yii\console\Application as ConsoleApplication;
  * @method static CarbonTracker getInstance()
  * @method Settings getSettings()
  * @property ApiService $api
+ * @property StatsService $stats
  * @author Statik.be <support@statik.be>
  * @copyright Statik.be
  * @license MIT
@@ -33,6 +39,7 @@ class CarbonTracker extends Plugin
         return [
             'components' => [
                 'api' => ApiService::class,
+                'stats' => StatsService::class,
             ],
         ];
 
@@ -47,7 +54,7 @@ class CarbonTracker extends Plugin
         }
 
         // Defer most setup tasks until Craft is fully initialized
-        Craft::$app->onInit(function() {
+        Craft::$app->onInit(function () {
             $this->attachEventHandlers();
         });
     }
@@ -67,6 +74,20 @@ class CarbonTracker extends Plugin
 
     private function attachEventHandlers(): void
     {
+        Event::on(Entry::class, Entry::EVENT_AFTER_SAVE,
+            function (ModelEvent $event) {
+                /** @var Entry $entry */
+                $entry = $event->sender;
+                if(!ElementHelper::isDraftOrRevision($entry) && $entry->getUrl()) {
+                    //CarbonTracker::getInstance()->stats->upsertDataForEntry($entry);
+                    Queue::push(new CarbonStatsJob([
+                        'entryId' => $entry->id,
+                        'title' => $entry->title,
+                    ]), 2000, 0, 1);
+                }
+
+
+            });
 
         Event::on(
             Entry::class,
@@ -74,14 +95,14 @@ class CarbonTracker extends Plugin
             function (DefineHtmlEvent $event) {
                 /** @var Entry $entry */
                 $entry = $event->sender;
+
+                $stats = $this->stats->getDataForEntry($entry);
                 $data = Craft::$app->getView()->renderTemplate(
                     'carbon-tracker/_cp/_sidebar/_stats.twig',
-                    ['entry' => $entry]
+                    ['entry' => $entry, 'stats' => $stats]
                 );
                 $event->html .= $data;
             }
         );
-        // Register event handlers here ...
-        // (see https://craftcms.com/docs/4.x/extend/events.html to get started)
     }
 }

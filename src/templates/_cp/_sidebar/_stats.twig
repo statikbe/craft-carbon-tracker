@@ -1,5 +1,50 @@
-<div class="input ltr">
-    <div class="nicetext notes text fullwidth">
-        dddd?
+<div class="heading">
+    <label class="h6" >
+        Website carbon rating for this page</label>
+</div>
+<div class="meta">
+    <div class="field" >
+        <div class="heading">
+            <label>Rating</label>
+        </div>
+        <div class="input ltr">
+            {% switch stats.rating %}
+                {% case 'C' %}
+                    🟩 {{ stats.rating }}
+                {% case 'B' %}
+                    🟩🟩 {{ stats.rating }}
+                {% case 'A' %}
+                    🟩🟩🟩 {{ stats.rating }}
+                {% case 'A+' %}
+                    🟩🟩🟩✨ {{ stats.rating }}
+            {% endswitch %}
+        </div>
     </div>
+    <div class="field" >
+        <div class="heading">
+            <label>Cleaner then</label>
+        </div>
+        <div class="input ltr">
+            {{ stats.cleanerThan * 100 }}% of websites measures
+        </div>
+    </div>
+    <div class="field" >
+        <div class="heading">
+            <label>Green hosting?</label>
+        </div>
+        <div class="input ltr">
+            {{ stats.green ? '✅' : '⛔️' }}
+        </div>
+    </div>
+    <div class="field" >
+        <div class="heading">
+            <label>Last checked</label>
+        </div>
+        <div class="input ltr">
+            {{ stats.dateUpdated|date('d/m/Y H:i') }}
+        </div>
+    </div>
+
+
+
 </div>
