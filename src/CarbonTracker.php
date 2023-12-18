@@ -33,6 +33,9 @@ class CarbonTracker extends Plugin
     public string $schemaVersion = '1.0.0';
     public bool $hasCpSettings = true;
 
+    /**
+     * @return non-empty-array<array>
+     */
     public static function config(): array
     {
         return [
@@ -77,7 +80,7 @@ class CarbonTracker extends Plugin
                 /** @var Entry $entry */
                 $entry = $event->sender;
                 if (!ElementHelper::isDraftOrRevision($entry) && $entry->getUrl()) {
-                    //CarbonTracker::getInstance()->stats->upsertDataForEntry($entry);
+//                    CarbonTracker::getInstance()->stats->upsertDataForEntry($entry);
                     Queue::push(new CarbonStatsJob([
                         'entryId' => $entry->id,
                         'title' => $entry->title,

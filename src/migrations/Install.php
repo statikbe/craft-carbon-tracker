@@ -43,11 +43,7 @@ class Install extends Migration
 
     public function safeDown(): bool
     {
-        try {
-            $this->dropTableIfExists(SiteStatisticsRecord::tableName());
-            return true;
-        } catch (\Exception $e) {
-            Craft::error($e->getMessage());
-        }
+        $this->dropTableIfExists(SiteStatisticsRecord::tableName());
+        return true;
     }
 }

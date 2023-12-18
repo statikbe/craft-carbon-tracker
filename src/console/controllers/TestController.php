@@ -3,13 +3,17 @@
 namespace statikbe\carbontracker\console\controllers;
 
 use craft\console\Controller;
+use craft\elements\Entry;
 use statikbe\carbontracker\CarbonTracker;
 
 class TestController extends Controller
 {
-    public function actionIndex()
+    public function actionIndex(int $id): void
     {
-        $data = CarbonTracker::getInstance()->api->getSite("https://www.statik.be");
+        $entry = Entry::findOne(['id' => $id]);
+        $data = CarbonTracker::getInstance()->api->getSite($entry);
         dd($data);
     }
+
+
 }

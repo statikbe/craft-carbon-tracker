@@ -25,7 +25,7 @@ class ApiService extends Component
     public function getSite(Entry $entry): SiteStatisticsModel
     {
         if (getenv('CRAFT_ENVIRONMENT') === 'dev') {
-            $url = "https://www.statik.be";
+            $url = "https://www.websitecarbon.com/introducing-the-website-carbon-rating-system/";
         } else {
             $url = $entry->getUrl();
         }
@@ -47,7 +47,12 @@ class ApiService extends Component
         return $model;
     }
 
-    private function makeRequest($endpoint, $data)
+    /**
+     * @param string $endpoint
+     * @param non-empty-array<string, array> $data
+     * @return non-empty-array<array>|null
+     */
+    private function makeRequest(string $endpoint, array $data): array|null
     {
         $request = $this->client->get($endpoint, $data);
         return json_decode($request->getBody()->getContents(), true);

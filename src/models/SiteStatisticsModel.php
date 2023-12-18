@@ -15,8 +15,11 @@ class SiteStatisticsModel extends Model
     public int $bytes = 0;
     public float $cleanerThan = 0.0;
     public string $rating = "F";
-    public $dateUpdated;
+    public \DateTime $dateUpdated;
 
+    /**
+     * @return non-empty-array<array>
+     */
     public function rules(): array
     {
         return [

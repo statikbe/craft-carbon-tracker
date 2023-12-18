@@ -11,10 +11,9 @@ use statikbe\carbontracker\records\SiteStatisticsRecord;
 
 class StatsService extends Component
 {
-    public function getDataForEntry(Entry $entry)
+    public function getDataForEntry(Entry $entry): SiteStatisticsModel|bool
     {
         $record = SiteStatisticsRecord::findOne(['entryId' => $entry->id]);
-
 
         if (!$record) {
             // What if we don't have any data yet?
