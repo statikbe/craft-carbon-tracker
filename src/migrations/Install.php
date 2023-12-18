@@ -39,18 +39,15 @@ class Install extends Migration
         Craft::$app->getDb()->schema->refresh();
 
         return true;
-
-
     }
 
     public function safeDown(): bool
     {
         try {
-           $this->dropTableIfExists(SiteStatisticsRecord::tableName());
-           return true;
+            $this->dropTableIfExists(SiteStatisticsRecord::tableName());
+            return true;
         } catch (\Exception $e) {
             Craft::error($e->getMessage());
         }
-
     }
 }

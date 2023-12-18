@@ -2,10 +2,8 @@
 
 namespace statikbe\carbontracker\jobs;
 
-
 use craft\elements\Entry;
 use craft\queue\BaseJob;
-use craft\queue\QueueInterface;
 use statikbe\carbontracker\CarbonTracker;
 
 class CarbonStatsJob extends BaseJob
@@ -32,5 +30,4 @@ class CarbonStatsJob extends BaseJob
         $entry = Entry::findOne(['id' => $this->entryId, 'status' => null]);
         CarbonTracker::getInstance()->stats->upsertDataForEntry($entry);
     }
-
 }

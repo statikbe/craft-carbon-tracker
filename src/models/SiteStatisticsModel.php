@@ -2,7 +2,6 @@
 
 namespace statikbe\carbontracker\models;
 
-use Craft;
 use craft\base\Model;
 
 /**
@@ -21,9 +20,8 @@ class SiteStatisticsModel extends Model
     public function rules(): array
     {
         return [
-            [['entryId','url', 'green', 'bytes', 'cleanerThan', 'rating', 'dateUpdated'], 'required'],
-            [['entryId','url', 'green', 'bytes', 'cleanerThan', 'rating', 'dateUpdated'], 'safe'],
+            [['entryId', 'url', 'green', 'bytes', 'cleanerThan', 'rating', 'dateUpdated'], 'required'],
+            [['entryId', 'url', 'green', 'bytes', 'cleanerThan', 'rating', 'dateUpdated'], 'safe'],
         ];
     }
-
 }

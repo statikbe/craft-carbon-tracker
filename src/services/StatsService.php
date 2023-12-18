@@ -2,11 +2,9 @@
 
 namespace statikbe\carbontracker\services;
 
-
 use craft\base\Component;
 use craft\elements\Entry;
 use craft\helpers\DateTimeHelper;
-use GuzzleHttp\Client;
 use statikbe\carbontracker\CarbonTracker;
 use statikbe\carbontracker\models\SiteStatisticsModel;
 use statikbe\carbontracker\records\SiteStatisticsRecord;
@@ -37,7 +35,7 @@ class StatsService extends Component
             ->andWhere(['>=', 'dateCreated', $date->format('c')])
             ->one();
 
-        if($record) {
+        if ($record) {
             //We have a record from the past 24 hours, don't try and update now.
             \Craft::info("Skipping carbon update for {$entry->title}, we already have stats that are less than 24 hours old.", CarbonTracker::class);
             return;
