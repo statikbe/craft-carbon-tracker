@@ -2,7 +2,6 @@
 
 namespace statikbe\carbontracker\services;
 
-
 use craft\base\Component;
 use craft\elements\Entry;
 use GuzzleHttp\Client;
@@ -10,7 +9,6 @@ use statikbe\carbontracker\models\SiteStatisticsModel;
 
 class ApiService extends Component
 {
-
     private const API_URL = "https://api.websitecarbon.com";
 
     private Client $client;
@@ -19,22 +17,22 @@ class ApiService extends Component
     public function init(): void
     {
         $this->client = new Client([
-            'base_uri' => self::API_URL
+            'base_uri' => self::API_URL,
         ]);
         parent::init();
     }
 
     public function getSite(Entry $entry): SiteStatisticsModel
     {
-        if(getenv('CRAFT_ENVIRONMENT') === 'dev') {
-            $url = "https://www.github.com";
+        if (getenv('CRAFT_ENVIRONMENT') === 'dev') {
+            $url = "https://www.statik.be";
         } else {
             $url = $entry->getUrl();
         }
         $data = $this->makeRequest('/site', [
             'query' => [
-                'url' => $url
-            ]
+                'url' => $url,
+            ],
         ]);
 
         $model = new SiteStatisticsModel();

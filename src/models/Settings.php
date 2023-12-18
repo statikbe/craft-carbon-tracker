@@ -2,7 +2,6 @@
 
 namespace statikbe\carbontracker\models;
 
-use Craft;
 use craft\base\Model;
 
 /**
@@ -10,4 +9,5 @@ use craft\base\Model;
  */
 class Settings extends Model
 {
+    public $disclaimer = 'https://github.com/statikbe/craft-carbon-tracker';
 }

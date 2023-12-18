@@ -1,50 +1,65 @@
 <div class="heading">
-    <label class="h6" >
-        Website carbon rating for this page</label>
+    <label class="h6">
+        {{ " Website carbon rating for this page"|t('carbon-tracker') }}
+    </label>
 </div>
 <div class="meta">
-    <div class="field" >
+    <div class="field">
         <div class="heading">
-            <label>Rating</label>
+            <label>{{ "Rating"|t('carbon-tracker') }}</label>
         </div>
         <div class="input ltr">
             {% switch stats.rating %}
-                {% case 'C' %}
-                    🟩 {{ stats.rating }}
-                {% case 'B' %}
-                    🟩🟩 {{ stats.rating }}
-                {% case 'A' %}
-                    🟩🟩🟩 {{ stats.rating }}
-                {% case 'A+' %}
-                    🟩🟩🟩✨ {{ stats.rating }}
+            {% case 'F' %}
+                {{ stats.rating }} 🟥 ‼️
+            {% case 'E' %}
+                {{ stats.rating }} 🟧
+            {% case 'D' %}
+                {{ stats.rating }} 🟨
+            {% case 'C' %}
+                {{ stats.rating }} 🟩
+            {% case 'B' %}
+                {{ stats.rating }} 🟩🟩
+            {% case 'A' %}
+                {{ stats.rating }} 🟩🟩🟩
+            {% case 'A+' %}
+                {{ stats.rating }} 🟩🟩🟩✨
             {% endswitch %}
         </div>
     </div>
-    <div class="field" >
+    <div class="field">
         <div class="heading">
-            <label>Cleaner then</label>
+            <label>{{ "Cleaner than"|t('carbon-tracker') }}</label>
         </div>
         <div class="input ltr">
-            {{ stats.cleanerThan * 100 }}% of websites measures
+            {{ stats.cleanerThan * 100 }}% {{ "of websites measure"|t('carbon-tracker') }}
         </div>
     </div>
-    <div class="field" >
+    <div class="field">
         <div class="heading">
-            <label>Green hosting?</label>
+            <label>{{ "Green hosting?"|t('carbon-tracker') }}</label>
         </div>
         <div class="input ltr">
-            {{ stats.green ? '✅' : '⛔️' }}
+            {{ stats.green ? '🌳 ✅' : '⛔️' }}
         </div>
     </div>
-    <div class="field" >
+    <div class="field">
         <div class="heading">
-            <label>Last checked</label>
+            <label>{{ "Last checked"|t('carbon-tracker') }}</label>
         </div>
         <div class="input ltr">
-            {{ stats.dateUpdated|date('d/m/Y H:i') }}
+            {{ stats.dateUpdated|date('d/m/Y H:i') }} <br>
+
         </div>
     </div>
+    <div class="field">
+        <div class="" style="padding: 14px 0;">
+            <em>{{ "Updates only happen on save and only once every 24 hours" }}</em><br><br>
 
-
-
+            <em>
+                {{ "Learn more about the carbon footprint of webpages and the rating system being used <a href='{link}' target='_blank'>here</a>"|t('carbon-tracker',
+                    {link: 'https://www.websitecarbon.com/introducing-the-website-carbon-rating-system/'})|raw }}
+            </em>
+        </div>
+    </div>
 </div>
