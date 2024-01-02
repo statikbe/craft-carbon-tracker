@@ -32,7 +32,7 @@
     },
     "extra": {
         "handle": "carbon-tracker",
-        "name": "Carbon Usage Tracker",
+        "name": "Carbon Emission Tracker",
         "developer": "Statik.be",
         "documentationUrl": "https://github.com/statikbe/craft-carbon-tracker",
         "class": "statikbe\\carbontracker\\CarbonTracker"

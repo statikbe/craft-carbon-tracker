@@ -1,6 +1,6 @@
 <img src="img/github_banner.png" alt="">
 
-# Carbon usage tracker for Craft CMS
+# Carbon Emission Tracker for Craft CMS
 
 Carbon tracker aims to raise awareness of the carbon emissions created by webpages, by displaying these insights along side the content in Craft's control panel.
 
@@ -13,7 +13,7 @@ When publishing a new page, the plugin will call the [websitecarbon.com](https:/
 <img src="img/github_screenshot.png" alt="">
 
 ### Local development 
-When you install the public on a local environment, it will always use websitecarbon.com as the url for which to get the current score, since the API needs a publicly available url)
+When you install the plugin on a local environment, it will always use websitecarbon.com as the url for which to get the current score, since the API needs a publicly available url)
 
 --- 
 ## Requirements
