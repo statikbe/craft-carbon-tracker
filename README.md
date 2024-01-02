@@ -1,6 +1,6 @@
 <img src="img/github_banner.png" alt="">
 
-# Carbon Emission Tracker for Craft CMS
+# Carbon Emissions Tracker for Craft CMS
 
 Carbon tracker aims to raise awareness of the carbon emissions created by webpages, by displaying these insights along side the content in Craft's control panel.
 
