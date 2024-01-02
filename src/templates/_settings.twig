@@ -1,0 +1,12 @@
+{# @var plugin \statikbe\carbontracker\CarbonTracker #}
+{# @var settings \statikbe\carbontracker\models\Settings #}
+
+{% import '_includes/forms.twig' as forms %}
+
+{{ forms.textField({
+    label: 'More information link'|t('carbon-tracker'),
+    instructions: 'You can overwrite the link added to the sidebar block, to link to your own content on the subject. (defaults to websitecarbon.com)'|t('carbon-tracker'),
+    id: 'readmoreLink',
+    name: 'readmoreLink',
+    value: settings['readmoreLink']})
+}}
