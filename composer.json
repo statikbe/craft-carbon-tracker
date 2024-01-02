@@ -17,6 +17,13 @@
         "craftcms/ecs": "dev-main",
         "craftcms/phpstan": "dev-main"
     },
+    "authors": [
+        {
+            "name": "Jan Henckens",
+            "email": "jan@statik.be",
+            "homepage": "https://www.statik.de"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "statikbe\\carbontracker\\": "src/"
