@@ -8,7 +8,7 @@ The plugin uses the [websitecarbon.com API](https://www.websitecarbon.com/) (we'
 
 ## How does it work?
 
-When publishing a new page, the plugin will call the websitecarbon.com API with the url of the page in question (this is done through a queue job as to not block the user) and a couple of minutes later, you'll see a new block appear in the sidebar of the entry detail page.
+When publishing a new page, the plugin will call the [websitecarbon.com](https://www.websitecarbon.com) API with the url of the page in question (this is done through a queue job as to not block the user) and a couple of minutes later, you'll see a new block appear in the sidebar of the entry detail page.
 
 <img src="img/github_screenshot.png" alt="">
 
