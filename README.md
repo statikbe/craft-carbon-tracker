@@ -4,7 +4,7 @@
 
 Carbon tracker aims to raise awareness of the carbon emissions created by webpages, by displaying these insights along side the content in Craft's control panel.
 
-The plugin uses the [websitecarbon.com API](https://www.websitecarbon.com/) (we're affiliated, although we do consider them friends 💚), and will only check for new metrics once every 24 hours. **That means you won't see new metrics for every update or change you make** - as that would result in lots of API calls, defeating the purpose of keeping our footprint as small as possible 🙂.
+The plugin uses the [websitecarbon.com API](https://www.websitecarbon.com/) (we're not affiliated, although we do consider them friends 💚), and will only check for new metrics once every 24 hours. **That means you won't see new metrics for every update or change you make** - as that would result in lots of API calls, defeating the purpose of keeping our footprint as small as possible 🙂.
 
 ## How does it work?
 
