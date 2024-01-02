@@ -1,5 +1,6 @@
 {
     "name": "statikbe/craft-carbon-tracker",
+    "description": "Carbon tracker aims to raise awareness of the carbon emissions created by webpages, by displaying these insights along side the content in Craft's control panel.",
     "type": "craft-plugin",
     "license": "mit",
     "support": {
