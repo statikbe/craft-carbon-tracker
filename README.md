@@ -1,9 +1,13 @@
-# carbon-tracker
+<img src="img/github_banner.png" alt="">
 
+# Carbon usage tracker for Craft CMS
+
+Carbon tracker aims to give control panel users more insights into the carbon emissions of their pages.
+
+The plugin uses the [websitecarbon.com API](https://www.websitecarbon.com/), and will only check for new metrics once every 24 hours. **That means you won't see new metrics for every update or change you make** - as that would result in lots of API calls, defeating the purpose of keeping our footprint as small as possible 🙂.
 
 
 ## Requirements
-
 This plugin requires Craft CMS 4.5.0 or later, and PHP 8.0.2 or later.
 
 ## Installation
