@@ -9,5 +9,5 @@ use craft\base\Model;
  */
 class Settings extends Model
 {
-
+    public string $readmoreLink = 'https://www.websitecarbon.com/introducing-the-website-carbon-rating-system/';
 }

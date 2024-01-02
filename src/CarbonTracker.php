@@ -15,6 +15,7 @@ use statikbe\carbontracker\jobs\CarbonStatsJob;
 use statikbe\carbontracker\models\Settings;
 use statikbe\carbontracker\services\ApiService;
 use statikbe\carbontracker\services\StatsService;
+use yii\base\Exception;
 use yii\console\Application as ConsoleApplication;
 
 /**
@@ -55,7 +56,7 @@ class CarbonTracker extends Plugin
         }
 
         // Defer most setup tasks until Craft is fully initialized
-        Craft::$app->onInit(function() {
+        Craft::$app->onInit(function () {
             $this->attachEventHandlers();
         });
     }
@@ -76,11 +77,10 @@ class CarbonTracker extends Plugin
     private function attachEventHandlers(): void
     {
         Event::on(Entry::class, Entry::EVENT_AFTER_SAVE,
-            function(ModelEvent $event) {
+            function (ModelEvent $event) {
                 /** @var Entry $entry */
                 $entry = $event->sender;
                 if (!ElementHelper::isDraftOrRevision($entry) && $entry->getUrl()) {
-//                    CarbonTracker::getInstance()->stats->upsertDataForEntry($entry);
                     Queue::push(new CarbonStatsJob([
                         'entryId' => $entry->id,
                         'title' => $entry->title,
@@ -91,18 +91,26 @@ class CarbonTracker extends Plugin
         Event::on(
             Entry::class,
             Entry::EVENT_DEFINE_SIDEBAR_HTML,
-            function(DefineHtmlEvent $event) {
+            function (DefineHtmlEvent $event) {
                 /** @var Entry $entry */
                 $entry = $event->sender;
-                if (!ElementHelper::isDraftOrRevision($entry)) {
-                    $stats = $this->stats->getDataForEntry($entry);
-                    if ($stats) {
-                        $data = Craft::$app->getView()->renderTemplate(
-                            'carbon-tracker/_cp/_sidebar/_stats.twig',
-                            ['entry' => $entry, 'stats' => $stats]
-                        );
-                        $event->html .= $data;
+                try {
+                    if (!ElementHelper::isDraftOrRevision($entry)) {
+                        $stats = $this->stats->getDataForEntry($entry);
+                        if ($stats) {
+                            $data = Craft::$app->getView()->renderTemplate(
+                                'carbon-tracker/_cp/_sidebar/_stats.twig',
+                                [
+                                    'entry' => $entry,
+                                    'stats' => $stats,
+                                    'settings' => $this->getSettings(),
+                                ]
+                            );
+                            $event->html .= $data;
+                        }
                     }
+                } catch (Exception $e) {
+                    Craft::error($e->getMessage(), __CLASS__);
                 }
             }
         );
