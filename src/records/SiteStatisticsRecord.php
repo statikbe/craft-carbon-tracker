@@ -13,7 +13,7 @@ use craft\db\ActiveRecord;
  */
 class SiteStatisticsRecord extends ActiveRecord
 {
-    public static function tableName()
+    public static function tableName(): string
     {
         return '{{%carbontracker_stats}}';
     }
