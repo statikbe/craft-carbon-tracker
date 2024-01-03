@@ -10,9 +10,9 @@ use statikbe\carbontracker\models\SiteStatisticsModel;
 class ApiService extends Component
 {
     private const API_URL = "https://api.websitecarbon.com";
+    public const READ_MORE_LINK = 'https://www.websitecarbon.com/introducing-the-website-carbon-rating-system/';
 
     private Client $client;
-
 
     public function init(): void
     {
@@ -24,18 +24,24 @@ class ApiService extends Component
 
     public function getSite(Entry $entry): SiteStatisticsModel
     {
+        $model = new SiteStatisticsModel();
+
         if (getenv('CRAFT_ENVIRONMENT') === 'dev') {
-            $url = "https://www.websitecarbon.com/introducing-the-website-carbon-rating-system/";
+            $url = self::READ_MORE_LINK;
         } else {
             $url = $entry->getUrl();
         }
+
         $data = $this->makeRequest('/site', [
             'query' => [
                 'url' => $url,
             ],
         ]);
 
-        $model = new SiteStatisticsModel();
+        if (empty($data)) {
+            return $model;
+        }
+
         $model->setAttributes([
             'entryId' => $entry->id,
             'url' => $data['url'],
@@ -44,6 +50,7 @@ class ApiService extends Component
             'cleanerThan' => $data['cleanerThan'],
             'rating' => $data['rating'],
         ]);
+
         return $model;
     }
 
