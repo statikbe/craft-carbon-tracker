@@ -83,6 +83,7 @@ class CarbonTracker extends Plugin
                 if (!ElementHelper::isDraftOrRevision($entry) && $entry->getUrl()) {
                     Queue::push(new CarbonStatsJob([
                         'entryId' => $entry->id,
+                        'siteId' => $entry->siteId,
                         'title' => $entry->title,
                     ]), 2000, 0, 1);
                 }
