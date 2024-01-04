@@ -10,6 +10,8 @@ class CarbonStatsJob extends BaseJob
 {
     public int $entryId;
 
+    public int $siteId = 0;
+
     public string $title;
 
     /**
@@ -27,7 +29,9 @@ class CarbonStatsJob extends BaseJob
      */
     public function execute($queue): void
     {
-        $entry = Entry::findOne(['id' => $this->entryId, 'status' => null]);
-        CarbonTracker::getInstance()->stats->upsertDataForEntry($entry);
+        $entry = Entry::findOne(['id' => $this->entryId,'siteId' => $this->siteId, 'status' => null]);
+        if($entry) {
+            CarbonTracker::getInstance()->stats->upsertDataForEntry($entry);
+        }
     }
 }
