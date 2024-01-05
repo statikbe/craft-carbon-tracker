@@ -29,7 +29,7 @@ class CarbonStatsJob extends BaseJob
      */
     public function execute($queue): void
     {
-        $entry = Entry::findOne(['id' => $this->entryId,'siteId' => $this->siteId, 'status' => null]);
+        $entry = Entry::findOne(['id' => $this->entryId,'siteId' => $this->siteId]);
         if($entry) {
             CarbonTracker::getInstance()->stats->upsertDataForEntry($entry);
         }
