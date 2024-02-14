@@ -2,12 +2,11 @@ name: ci
 on:
   workflow_dispatch:
   push:
-    branches:
-      - develop
+    branches: [ develop ]
+    paths:
+      - '**.php'
+    push:
     pull_request:
-      branches: [ develop ]
-      paths:
-        - '**.php'
 permissions:
   contents: read
 concurrency:
