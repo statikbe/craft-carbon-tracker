@@ -8,7 +8,6 @@
 ### Fixed
 - Only run our job for enabled entries, because we need to be able to crawl them.
 
-
 ## 4.0.1 - 2024-01-04
 ### Fixed
 - Fixed issue with failing jobs on multi-site installs
