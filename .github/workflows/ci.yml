@@ -14,7 +14,7 @@ concurrency:
 jobs:
   ci:
     name: ci
-    uses: statikbe/.github/.github/workflows/craftcms/ci.yml@main
+    uses: statikbe/.github/.github/workflows/ci.yml@main
     with:
       craft_version: '4'
       jobs: '["ecs", "phpstan"]'
