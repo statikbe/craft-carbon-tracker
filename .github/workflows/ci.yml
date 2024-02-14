@@ -5,7 +5,10 @@ on:
     branches:
       - develop
     pull_request:
-      - ready_for_review
+      types:
+        - opened
+      paths:
+        - '**.php'
 permissions:
   contents: read
 concurrency:
