@@ -25,8 +25,6 @@ use yii\console\Application as ConsoleApplication;
  * @method Settings getSettings()
  * @property ApiService $api
  * @property StatsService $stats
- * @author Statik.be <support@statik.be>
- * @copyright Statik.be
  * @license MIT
  */
 class CarbonTracker extends Plugin
