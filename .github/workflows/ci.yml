@@ -5,7 +5,6 @@ on:
     branches:
       - develop
     pull_request:
-      - ready_for_review
 permissions:
   contents: read
 concurrency:
