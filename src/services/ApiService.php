@@ -9,9 +9,13 @@ use statikbe\carbontracker\models\SiteStatisticsModel;
 
 class ApiService extends Component
 {
+
     private const API_URL = "https://api.websitecarbon.com";
     public const READ_MORE_LINK = 'https://www.websitecarbon.com/introducing-the-website-carbon-rating-system/';
 
+    /**
+     * @var Client
+     */
     private Client $client;
 
     public function init(): void
