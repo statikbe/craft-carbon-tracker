@@ -56,7 +56,7 @@ class CarbonTracker extends Plugin
         }
 
         // Defer most setup tasks until Craft is fully initialized
-        Craft::$app->onInit(function () {
+        Craft::$app->onInit(function() {
             $this->attachEventHandlers();
         });
     }
@@ -77,7 +77,7 @@ class CarbonTracker extends Plugin
     private function attachEventHandlers(): void
     {
         Event::on(Entry::class, Entry::EVENT_AFTER_SAVE,
-            function (ModelEvent $event) {
+            function(ModelEvent $event) {
                 /** @var Entry $entry */
                 $entry = $event->sender;
                 if (!ElementHelper::isDraftOrRevision($entry) && $entry->getUrl()) {
@@ -92,7 +92,7 @@ class CarbonTracker extends Plugin
         Event::on(
             Entry::class,
             Entry::EVENT_DEFINE_SIDEBAR_HTML,
-            function (DefineHtmlEvent $event) {
+            function(DefineHtmlEvent $event) {
                 /** @var Entry $entry */
                 $entry = $event->sender;
                 try {

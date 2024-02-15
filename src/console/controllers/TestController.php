@@ -14,6 +14,4 @@ class TestController extends Controller
         $data = CarbonTracker::getInstance()->api->getSite($entry);
         dd($data);
     }
-
-
 }
