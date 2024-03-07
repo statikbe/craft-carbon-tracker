@@ -15,6 +15,7 @@ class Install extends Migration
             [
                 'id' => $this->primaryKey(),
                 'entryId' => $this->integer()->notNull(),
+                'siteId' => $this->integer()->notNull(),
                 'url' => $this->string()->notNull(),
                 'green' => $this->boolean()->defaultValue(0),
                 'bytes' => $this->integer(),
