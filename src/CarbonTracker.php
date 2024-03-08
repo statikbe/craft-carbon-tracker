@@ -31,7 +31,7 @@ use yii\console\Application as ConsoleApplication;
  */
 class CarbonTracker extends Plugin
 {
-    public string $schemaVersion = '1.0.0';
+    public string $schemaVersion = '1.1.0';
     public bool $hasCpSettings = true;
 
     /**
@@ -80,7 +80,7 @@ class CarbonTracker extends Plugin
             function(ModelEvent $event) {
                 /** @var Entry $entry */
                 $entry = $event->sender;
-                if (!ElementHelper::isDraftOrRevision($entry) && $entry->getUrl()) {
+                if (!ElementHelper::isDraftOrRevision($entry) && $entry->getUrl() && !$entry->propagating) {
                     Queue::push(new CarbonStatsJob([
                         'entryId' => $entry->id,
                         'siteId' => $entry->siteId,

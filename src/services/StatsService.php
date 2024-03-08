@@ -31,6 +31,7 @@ class StatsService extends Component
         $date = DateTimeHelper::currentUTCDateTime()->modify('-1 day');
         $record = SiteStatisticsRecord::find()
             ->where(['=', 'entryId', $entry->id])
+            ->andWhere(['=', 'siteId', $entry->siteId])
             ->andWhere(['>=', 'dateCreated', $date->format('c')])
             ->one();
 
@@ -41,12 +42,15 @@ class StatsService extends Component
         }
 
         $stats = CarbonTracker::getInstance()->api->getSite($entry);
-        $record = new SiteStatisticsRecord();
-        $record->entryId = $stats->entryId;
-        $record->url = $stats->url;
-        $record->green = $stats->green;
-        $record->cleanerThan = $stats->cleanerThan;
-        $record->rating = $stats->rating;
-        $record->save();
+        if ($stats) {
+            $record = new SiteStatisticsRecord();
+            $record->entryId = $stats->entryId;
+            $record->siteId = $stats->siteId;
+            $record->url = $stats->url;
+            $record->green = $stats->green;
+            $record->cleanerThan = $stats->cleanerThan;
+            $record->rating = $stats->rating;
+            $record->save();
+        }
     }
 }

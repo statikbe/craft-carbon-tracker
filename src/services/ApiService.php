@@ -5,6 +5,7 @@ namespace statikbe\carbontracker\services;
 use craft\base\Component;
 use craft\elements\Entry;
 use GuzzleHttp\Client;
+use statikbe\carbontracker\CarbonTracker;
 use statikbe\carbontracker\models\SiteStatisticsModel;
 
 class ApiService extends Component
@@ -22,7 +23,7 @@ class ApiService extends Component
         parent::init();
     }
 
-    public function getSite(Entry $entry): SiteStatisticsModel
+    public function getSite(Entry $entry): SiteStatisticsModel|bool
     {
         $model = new SiteStatisticsModel();
 
@@ -32,26 +33,32 @@ class ApiService extends Component
             $url = $entry->getUrl();
         }
 
-        $data = $this->makeRequest('/site', [
-            'query' => [
-                'url' => $url,
-            ],
-        ]);
+        try {
+            $data = $this->makeRequest('/site', [
+                'query' => [
+                    'url' => $url,
+                ],
+            ]);
 
-        if (empty($data)) {
+            if (empty($data)) {
+                return $model;
+            }
+
+            $model->setAttributes([
+                'entryId' => $entry->id,
+                'siteId' => $entry->siteId,
+                'url' => $data['url'],
+                'green' => $data['green'],
+                'bytes' => $data['bytes'],
+                'cleanerThan' => $data['cleanerThan'],
+                'rating' => $data['rating'],
+            ]);
+
             return $model;
+        } catch (\Exception $e) {
+            \Craft::error($e->getMessage(), CarbonTracker::class);
+            return false;
         }
-
-        $model->setAttributes([
-            'entryId' => $entry->id,
-            'url' => $data['url'],
-            'green' => $data['green'],
-            'bytes' => $data['bytes'],
-            'cleanerThan' => $data['cleanerThan'],
-            'rating' => $data['rating'],
-        ]);
-
-        return $model;
     }
 
     /**

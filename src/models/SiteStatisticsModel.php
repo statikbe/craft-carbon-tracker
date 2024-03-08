@@ -10,6 +10,7 @@ use craft\base\Model;
 class SiteStatisticsModel extends Model
 {
     public int $entryId;
+    public int $siteId;
     public string $url = "https://";
     public bool $green = false;
     public int $bytes = 0;
@@ -23,8 +24,8 @@ class SiteStatisticsModel extends Model
     public function rules(): array
     {
         return [
-            [['entryId', 'url', 'green', 'bytes', 'cleanerThan', 'rating', 'dateUpdated'], 'required'],
-            [['entryId', 'url', 'green', 'bytes', 'cleanerThan', 'rating', 'dateUpdated'], 'safe'],
+            [['entryId', 'siteId', 'url', 'green', 'bytes', 'cleanerThan', 'rating', 'dateUpdated'], 'required'],
+            [['entryId', 'siteId', 'url', 'green', 'bytes', 'cleanerThan', 'rating', 'dateUpdated'], 'safe'],
         ];
     }
 }

@@ -2,7 +2,6 @@
 
 namespace statikbe\carbontracker\migrations;
 
-use Craft;
 use craft\db\Migration;
 use statikbe\carbontracker\records\SiteStatisticsRecord;
 
