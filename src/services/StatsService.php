@@ -18,7 +18,7 @@ class StatsService extends Component
         if (!$record) {
             // Search again without the siteId
             $record = SiteStatisticsRecord::findOne(['entryId' => $entry->id]);
-            if(!$record) {
+            if (!$record) {
                 return false;
             }
         }

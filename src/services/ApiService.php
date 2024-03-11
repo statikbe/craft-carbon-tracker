@@ -52,10 +52,7 @@ class ApiService extends Component
 
             $data = json_decode($json_data, true);
         } else {
-
-
             try {
-
                 $url = $entry->getUrl();
                 $data = $this->makeRequest('/site', [
                     'query' => [
