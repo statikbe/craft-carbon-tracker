@@ -28,37 +28,62 @@ class ApiService extends Component
         $model = new SiteStatisticsModel();
 
         if (getenv('CRAFT_ENVIRONMENT') === 'dev') {
-            $url = self::READ_MORE_LINK;
+            $json_data = '{
+                "url": "https://www.wholegraindigital.com/",
+                "green": true,
+                "rating": "A+",
+                "bytes": 443854,
+                "cleanerThan": 0.83,
+                "statistics": {
+                    "adjustedBytes": 335109.77,
+                    "energy": 0.0005633320052642376,
+                    "co2": {
+                        "grid": {
+                            "grams": 0.26758270250051286,
+                            "litres": 0.14882949913078525
+                        },
+                        "renewable": {
+                            "grams": 0.24250694721722435,
+                            "litres": 0.13488236404222018
+                        }
+                    }
+                }
+            }';
+
+            $data = json_decode($json_data, true);
         } else {
-            $url = $entry->getUrl();
-        }
 
-        try {
-            $data = $this->makeRequest('/site', [
-                'query' => [
-                    'url' => $url,
-                ],
-            ]);
 
-            if (empty($data)) {
-                return $model;
+            try {
+
+                $url = $entry->getUrl();
+                $data = $this->makeRequest('/site', [
+                    'query' => [
+                        'url' => $url,
+                    ],
+                ]);
+            } catch (\Exception $e) {
+                \Craft::error($e->getMessage(), CarbonTracker::class);
+                return false;
             }
-
-            $model->setAttributes([
-                'entryId' => $entry->id,
-                'siteId' => $entry->siteId,
-                'url' => $data['url'],
-                'green' => $data['green'],
-                'bytes' => $data['bytes'],
-                'cleanerThan' => $data['cleanerThan'],
-                'rating' => $data['rating'],
-            ]);
-
-            return $model;
-        } catch (\Exception $e) {
-            \Craft::error($e->getMessage(), CarbonTracker::class);
-            return false;
         }
+
+
+        if (empty($data)) {
+            return $model;
+        }
+
+        $model->setAttributes([
+            'entryId' => $entry->id,
+            'siteId' => $entry->siteId,
+            'url' => $data['url'],
+            'green' => $data['green'],
+            'bytes' => $data['bytes'],
+            'cleanerThan' => $data['cleanerThan'],
+            'rating' => $data['rating'],
+        ]);
+
+        return $model;
     }
 
     /**
