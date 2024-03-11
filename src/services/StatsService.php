@@ -13,11 +13,14 @@ class StatsService extends Component
 {
     public function getDataForEntry(Entry $entry): SiteStatisticsModel|bool
     {
-        $record = SiteStatisticsRecord::findOne(['entryId' => $entry->id]);
-
+        $record = SiteStatisticsRecord::findOne(['entryId' => $entry->id, 'siteId' => $entry->siteId]);
+        
         if (!$record) {
-            // What if we don't have any data yet?
-            return false;
+            // Search again without the siteId
+            $record = SiteStatisticsRecord::findOne(['entryId' => $entry->id]);
+            if(!$record) {
+                return false;
+            }
         }
 
         $model = new SiteStatisticsModel();
