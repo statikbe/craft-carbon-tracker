@@ -2,7 +2,7 @@
     "name": "statikbe/craft-carbon-tracker",
     "description": "Carbon tracker aims to raise awareness of the carbon emissions created by webpages, by displaying these insights along side the content in Craft's control panel.",
     "type": "craft-plugin",
-    "version": "4.1.0",
+    "version": "5.0.0",
     "license": "mit",
     "support": {
         "email": "support@statik.be",
@@ -12,8 +12,7 @@
         "rss": "https://github.com/statikbe/craft-carbon-tracker/releases.atom"
     },
     "require": {
-        "php": ">=8.0.2",
-        "craftcms/cms": "^4.5.0"
+        "craftcms/cms": "^5.0.0-beta.1"
     },
     "require-dev": {
         "craftcms/ecs": "dev-main",
@@ -46,9 +45,6 @@
     },
     "config": {
         "sort-packages": true,
-        "platform": {
-            "php": "8.0.2"
-        },
         "allow-plugins": {
             "yiisoft/yii2-composer": true,
             "craftcms/plugin-installer": true

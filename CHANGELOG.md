@@ -1,5 +1,9 @@
 # Release Notes for carbon-tracker
 
+## 5.0.0 - 2024-03-12
+### Added
+- Craft 5 support 🚀
+
 ## 4.1.0 - 2024-03-08
 ### Added
 - Added multisite support ([#3](https://github.com/statikbe/craft-carbon-tracker/issues/3))
