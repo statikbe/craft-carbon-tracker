@@ -6,6 +6,7 @@ use craft\db\ActiveRecord;
 
 /**
  * @property int $entryId entryId
+ * @property int $siteId siteId
  * @property string $url url
  * @property boolean $green green
  * @property float $cleanerThan cleanerThan
