@@ -1,5 +1,9 @@
 # Release Notes for carbon-tracker
 
+## 5.0.1 - 2024-04-10
+### Fixed
+- Fixed an installation error when using PostgreSQL ([#8](https://github.com/statikbe/craft-carbon-tracker/issues/8))
+
 ## 5.0.0 - 2024-03-12
 ### Added
 - Craft 5 support 🚀
