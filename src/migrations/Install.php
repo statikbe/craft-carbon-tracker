@@ -17,7 +17,7 @@ class Install extends Migration
                 'entryId' => $this->integer()->notNull(),
                 'siteId' => $this->integer()->notNull(),
                 'url' => $this->string()->notNull(),
-                'green' => $this->boolean()->defaultValue(0),
+                'green' => $this->boolean()->defaultValue(false),
                 'bytes' => $this->integer(),
                 'cleanerThan' => $this->float()->defaultValue(0.0),
                 'rating' => $this->string(2),

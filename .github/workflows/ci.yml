@@ -2,7 +2,9 @@ name: ci
 on:
   workflow_dispatch:
   push:
-    branches: [ develop ]
+    branches:
+      - develop
+      - develop-v5
   pull_request:
 permissions:
   contents: read
@@ -14,7 +16,8 @@ jobs:
     name: ci
     uses: statikbe/.github/.github/workflows/ci.yml@main
     with:
-      craft_version: '4'
+      craft_version: '5'
+      php_version: '8.2'
       jobs: '["ecs", "phpstan"]'
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}
