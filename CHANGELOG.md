@@ -1,5 +1,9 @@
 # Release Notes for carbon-tracker
 
+## 4.1.1 - 2024-09-02
+### Added
+- Fixed ttr on queue job
+
 ## 4.1.0 - 2024-03-08
 ### Added
 - Added multisite support ([#3](https://github.com/statikbe/craft-carbon-tracker/issues/3))
