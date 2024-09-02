@@ -85,7 +85,7 @@ class CarbonTracker extends Plugin
                         'entryId' => $entry->id,
                         'siteId' => $entry->siteId,
                         'title' => $entry->title,
-                    ]), 2000, 0, 1);
+                    ]), 2000, 0, 300);
                 }
             });
 
