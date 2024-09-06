@@ -1,5 +1,9 @@
 # Release Notes for carbon-tracker
 
+## 5.0.3 - 2024-09-02
+### Fixed
+- Website carbon sidebar always showed the OLDEST carbon result instead of the NEWEST
+
 ## 5.0.2 - 2024-09-02
 ### Added
 - Fixed ttr on queue job
