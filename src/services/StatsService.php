@@ -13,12 +13,14 @@ class StatsService extends Component
 {
     public function getDataForEntry(Entry $entry): SiteStatisticsModel|bool
     {
-        $record = SiteStatisticsRecord::findOne(['entryId' => $entry->id, 'siteId' => $entry->siteId]);
-        
-        if (!$record) {
-            // Search again without the siteId
-            $record = SiteStatisticsRecord::findOne(['entryId' => $entry->id]);
-            if (!$record) {
+        /** @var SiteStatisticsRecord|null $record */
+        $record = SiteStatisticsRecord::find()->where(['entryId' => $entry->id])->andWhere(['siteId' => $entry->siteId])->orderBy('id DESC')->one();
+
+        // INFO: if we don't find a record, we'll try to find one without the siteId
+        if ($record === null) {
+            /** @var SiteStatisticsRecord|null $record */
+            $record = SiteStatisticsRecord::find()->where(['entryId' => $entry->id])->orderBy('id DESC')->one();
+            if ($record === null) {
                 return false;
             }
         }
